@@ -1,0 +1,2 @@
+# textigma
+Text encryptor
