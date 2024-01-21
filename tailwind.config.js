@@ -9,6 +9,7 @@ export default {
                 purple: "#5555FF",
                 gray: "#AAAAAA",
                 blue: "#00AAAA",
+                darkblue: "#0000AA",
             },
             fontFamily: {
                 sans: ["DOS", "sans"],

@@ -1,9 +1,7 @@
-import React from "react";
-
 const texts = ["Text", "#$%^", "TYFN"];
 
 const Logo = () => (
-    <div className="font-DOS flex rounded-sm overflow-hidden">
+    <div className="font-DOS flex rounded-sm overflow-hidden w-fit">
         <div className="overflow-hidden max-h-[1.5rem]">
             <div className=" animate-downflow">
                 {texts.map((text, index) =>

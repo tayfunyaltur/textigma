@@ -30,9 +30,11 @@ const Button = ({
         <button
             onClick={onClick}
             disabled={disabled}
-            className={`${styles[buttonType]} ${sizes[size]} rounded-sm uppercase border-2 hover:border-black`}
+            className={`group ${styles[buttonType]} ${sizes[size]} rounded-sm uppercase border-2 hover:outline hover:outline-black flex`}
         >
+            <span className="opacity-0 group-hover:opacity-100">[</span>
             {children}
+            <span className="opacity-0 group-hover:opacity-100">]</span>
         </button>
     );
 };
