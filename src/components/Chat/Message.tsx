@@ -1,0 +1,28 @@
+import { Chat } from "../../types/room.type";
+import AES from "crypto-js/aes";
+
+const Message = ({ chat }: { chat: Chat }) => {
+    return (
+        <div
+            id={chat.id}
+            className={[
+                "text-white px-2 py-2 rounded-sm w-6/12",
+                chat.type === "sent" ? "ml-auto mr-4" : "mr-auto ml-4",
+                chat.type === "sent" ? "bg-green" : "bg-blue",
+            ].join(" ")}
+        >
+            <div className="w-full border-b border-white relative pt-3 break-all">
+                <div className="absolute top-0 right-0 text-xs">encrypted</div>
+                {AES.encrypt(chat.message, "6060").toString()}
+            </div>
+            <div className="w-full relative pb-3">
+                <div className="absolute bottom-0 right-0 text-xs">
+                    decrypted
+                </div>
+                {chat.message}
+            </div>
+        </div>
+    );
+};
+
+export default Message;

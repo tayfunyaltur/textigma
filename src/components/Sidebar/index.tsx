@@ -4,9 +4,11 @@ import RoomBox from "../RoomBox";
 import CreateModal from "./CreateModal";
 import { Room } from "../../types/room.type";
 import DeleteModal from "./DeleteModal";
+import { useNavigate } from "react-router-dom";
 
-const Sidebar = () => {
+const Sidebar = ({ roomId }: { roomId?: string }) => {
     const [isOpen, setIsOpen] = useState(false);
+    const navigate = useNavigate();
     const [deleteRoom, setDeleteRoom] = useState<Room>();
     const [rooms, setRooms] = useState(
         JSON.parse(localStorage.getItem("rooms") || "[]")
@@ -29,6 +31,7 @@ const Sidebar = () => {
             <Header />
             <div className="flex flex-col gap-2 px-4 py-4">
                 <RoomBox
+                    key={"newChat"}
                     roomName="New chat"
                     isPermanent
                     onClick={() => {
@@ -38,8 +41,11 @@ const Sidebar = () => {
                 {rooms.map((room: Room) => {
                     return (
                         <RoomBox
+                            key={room.id}
+                            isActive={room.id === roomId}
                             roomName={room.name}
                             onDelete={() => setDeleteRoom(room)}
+                            onClick={() => navigate(`/${room.id}`)}
                         />
                     );
                 })}

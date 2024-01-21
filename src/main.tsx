@@ -7,6 +7,10 @@ import ChatPage from "./pages/ChatPage.tsx";
 
 const router = createBrowserRouter([
     {
+        path: "/:roomId",
+        element: <ChatPage />,
+    },
+    {
         path: "/chat",
         element: <ChatPage />,
     },
