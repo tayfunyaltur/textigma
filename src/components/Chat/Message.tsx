@@ -40,13 +40,13 @@ const Message = ({ chat }: { chat: Chat }) => {
                         </Button>
                     </div>
                 </div>
-                {chat.message}
+                {chat?.message}
             </div>
             <div className="w-full relative pb-3">
                 <div className="absolute bottom-0 right-0 text-xs">
                     decrypted
                 </div>
-                {AES.decrypt(chat.message, room?.passcode || "").toString(
+                {AES.decrypt(chat.message, room?.passcode || "")?.toString(
                     CryptoJS.enc.Utf8
                 )}
             </div>
