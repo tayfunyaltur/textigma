@@ -4,10 +4,13 @@ import AES from "crypto-js/aes";
 import CryptoJS from "crypto-js";
 import Storage from "../../utils/storageUtils";
 import Button from "../Button";
+import { useContext } from "react";
+import { NotificationContext } from "../Toastr";
 
 const Message = ({ chat }: { chat: Chat }) => {
     const { roomId } = useParams();
     const room = Storage.getRoomById(roomId || "");
+    const notification = useContext(NotificationContext);
     return (
         <div
             id={chat.id}
@@ -23,11 +26,14 @@ const Message = ({ chat }: { chat: Chat }) => {
                         <span className="mr-2">encrypted</span>
                         <Button
                             size="xs"
-                            buttonType="primary"
+                            buttonType={
+                                chat.type === "sent" ? "primary" : "secondary"
+                            }
                             onClick={() => {
                                 window.navigator.clipboard.writeText(
                                     chat.message
                                 );
+                                notification("Copied to clipboard");
                             }}
                         >
                             copy

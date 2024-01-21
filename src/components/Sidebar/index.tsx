@@ -28,7 +28,7 @@ const Sidebar = ({ roomId }: { roomId?: string }) => {
     }, []);
 
     return (
-        <div className="bg-darkblue min-h-screen w-2/12">
+        <div className="bg-darkblue min-h-screen w-2/12 border-r border-r-black">
             <Header />
             <div className="flex flex-col gap-2 px-4 py-4">
                 <RoomBox

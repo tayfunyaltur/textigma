@@ -4,6 +4,7 @@ import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import LandingPage from "./pages/LandingPage.tsx";
 import ChatPage from "./pages/ChatPage.tsx";
+import Toastr from "./components/Toastr/index.tsx";
 
 const router = createBrowserRouter([
     {
@@ -22,6 +23,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
     <React.StrictMode>
-        <RouterProvider router={router} />
+        <Toastr>
+            <RouterProvider router={router} />
+        </Toastr>
     </React.StrictMode>
 );
