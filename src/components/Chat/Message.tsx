@@ -1,7 +1,5 @@
 import { useParams } from "react-router-dom";
 import { Chat } from "../../types/room.type";
-import AES from "crypto-js/aes";
-import CryptoJS from "crypto-js";
 import Storage from "../../utils/storageUtils";
 import Button from "../Button";
 import { useContext } from "react";
