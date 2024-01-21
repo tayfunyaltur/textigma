@@ -54,6 +54,7 @@ const Chat = ({ room }: ChatProps) => {
                         placeholder="Type Your Message"
                     />
                     <Button
+                        disabled={message.trim() === ""}
                         onClick={() => {
                             Storage.addChat(room?.id || "", message, "sent");
                             setMessages(
@@ -67,6 +68,7 @@ const Chat = ({ room }: ChatProps) => {
                         Encrypt
                     </Button>
                     <Button
+                        disabled={message.trim() === ""}
                         onClick={() => {
                             Storage.addChat(
                                 room?.id || "",
