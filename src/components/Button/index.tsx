@@ -21,7 +21,7 @@ const Button = ({
     };
 
     const sizes = {
-        xs:"py-0.5 px-1 text-xs",
+        xs: "py-0.5 px-1 text-xs",
         sm: "py-1 px-2 text-sm",
         md: "py-2 px-4 text-md",
         lg: "py-3 px-6 text-lg",
@@ -31,11 +31,17 @@ const Button = ({
         <button
             onClick={onClick}
             disabled={disabled}
-            className={`group ${styles[buttonType]} ${sizes[size]} rounded-sm uppercase border-2 hover:outline hover:outline-black flex`}
+            className={`disabled:cursor-not-allowed group ${styles[buttonType]} ${sizes[size]} rounded-sm uppercase border-2 hover:outline hover:outline-black flex`}
         >
-            <span className="opacity-0 group-hover:opacity-100">[</span>
+            <span className="opacity-0 group-disabled:opacity-100">x</span>
+            <span className="opacity-0 group-hover:opacity-100 group-disabled:opacity-0">
+                [
+            </span>
             {children}
-            <span className="opacity-0 group-hover:opacity-100">]</span>
+            <span className="opacity-0 group-hover:opacity-100 group-disabled:opacity-0">
+                ]
+            </span>
+            <span className="opacity-0 group-disabled:opacity-100">x</span>
         </button>
     );
 };

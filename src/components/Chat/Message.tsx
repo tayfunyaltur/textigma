@@ -6,6 +6,7 @@ import Storage from "../../utils/storageUtils";
 import Button from "../Button";
 import { useContext } from "react";
 import { NotificationContext } from "../Toastr";
+import messageUtils from "../../utils/messageUtils";
 
 const Message = ({ chat }: { chat: Chat }) => {
     const { roomId } = useParams();
@@ -42,12 +43,13 @@ const Message = ({ chat }: { chat: Chat }) => {
                 </div>
                 {chat?.message}
             </div>
-            <div className="w-full relative pb-3">
+            <div className="w-full relative pb-3 break-all">
                 <div className="absolute bottom-0 right-0 text-xs">
                     decrypted
                 </div>
-                {AES.decrypt(chat.message, room?.passcode || "")?.toString(
-                    CryptoJS.enc.Utf8
+                {messageUtils.DecryptMessage(
+                    chat.message,
+                    room?.passcode || ""
                 )}
             </div>
         </div>
