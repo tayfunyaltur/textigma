@@ -1,5 +1,6 @@
 import { Room } from "../../types/room.type";
 import Button from "../Button";
+import Storage from "../../utils/storageUtils";
 
 interface DeleteModalProps {
     isOpen: boolean;
@@ -10,7 +11,7 @@ interface DeleteModalProps {
 const DeleteModal = ({ isOpen, onClose, room }: DeleteModalProps) => {
     return (
         isOpen && (
-            <div className="absolute inset-0 bg-transparent flex items-center justify-center">
+            <div className="absolute inset-0 bg-transparent flex items-center justify-center z-10">
                 <div className="rounded-sm border-2 border-gray px-12 py-4 flex flex-col justify-center items-center bg-darkblue">
                     <span className="text-xl font-bold text-white">
                         <span className="text-red-800">{room.name}</span> will
@@ -23,16 +24,7 @@ const DeleteModal = ({ isOpen, onClose, room }: DeleteModalProps) => {
                         <Button
                             buttonType="secondary"
                             onClick={() => {
-                                const rooms = JSON.parse(
-                                    localStorage.getItem("rooms") || "[]"
-                                );
-                                const newRooms = rooms.filter(
-                                    (_room: Room) => _room?.id !== room.id
-                                );
-                                localStorage.setItem(
-                                    "rooms",
-                                    JSON.stringify(newRooms)
-                                );
+                                Storage.deleteRoom(room.id);
                                 const event = new Event("storage");
                                 dispatchEvent(event);
                                 onClose();
