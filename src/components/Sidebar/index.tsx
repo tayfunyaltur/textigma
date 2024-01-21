@@ -5,6 +5,7 @@ import CreateModal from "./CreateModal";
 import { Room } from "../../types/room.type";
 import DeleteModal from "./DeleteModal";
 import { useNavigate } from "react-router-dom";
+import Storage from "../../utils/storageUtils";
 
 const Sidebar = ({ roomId }: { roomId?: string }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -18,7 +19,7 @@ const Sidebar = ({ roomId }: { roomId?: string }) => {
     useEffect(() => {
         if (isListening.current) return;
         addEventListener("storage", () => {
-            setRooms(JSON.parse(localStorage.getItem("rooms") || "[]"));
+            setRooms(Storage.getRooms());
         });
         isListening.current = true;
         return () => {
@@ -27,7 +28,7 @@ const Sidebar = ({ roomId }: { roomId?: string }) => {
     }, []);
 
     return (
-        <div className="bg-darkblue min-h-screen w-3/12">
+        <div className="bg-darkblue min-h-screen w-2/12">
             <Header />
             <div className="flex flex-col gap-2 px-4 py-4">
                 <RoomBox

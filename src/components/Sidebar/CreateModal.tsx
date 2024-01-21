@@ -1,7 +1,7 @@
 import { useState } from "react";
 import TextInput from "../TextInput";
-import { v4 as uuidv4 } from "uuid";
 import Button from "../Button";
+import Storage from "../../utils/storageUtils";
 
 interface createModalProps {
     isOpen: boolean;
@@ -65,21 +65,7 @@ const CreateModal = ({ isOpen, onClose }: createModalProps) => {
                                     setError(errors);
                                     return;
                                 }
-                                const previousRooms =
-                                    JSON.parse(
-                                        localStorage.getItem("rooms")!
-                                    ) || [];
-                                localStorage.setItem(
-                                    "rooms",
-                                    JSON.stringify([
-                                        ...previousRooms,
-                                        {
-                                            id: uuidv4(),
-                                            name: roomName,
-                                            passcode,
-                                        },
-                                    ])
-                                );
+                                Storage.addRoom({ name: roomName, passcode });
                                 const event = new Event("storage");
                                 dispatchEvent(event);
                                 onClose();

@@ -4,35 +4,24 @@ import Button from "../Button";
 import TextInput from "../TextInput";
 import MessageContainer from "./MessageContainer";
 import { v4 as uuidv4 } from "uuid";
+import Storage from "../../utils/storageUtils";
 
 interface ChatProps {
     room?: Room;
 }
 
 const Chat = ({ room }: ChatProps) => {
-    const rooms = JSON.parse(localStorage.getItem("rooms") || "[]");
-    const _room = rooms.find((_room: Room) => _room.id === room?.id);
-    const [messages, setMessages] = useState<ChatType[]>(_room?.chats || []);
+    const [messages, setMessages] = useState<ChatType[]>(room?.chats || []);
     const [message, setMessage] = useState("");
 
     useEffect(() => {
-        if (!_room) return;
-        localStorage.setItem(
-            "rooms",
-            JSON.stringify(
-                rooms.map((r: Room) => {
-                    if (r.id === room?.id) {
-                        return {
-                            ...r,
-                            chats: messages,
-                        };
-                    }
-                    return r;
-                })
-            )
-        );
+        setMessages(room?.chats || []);
+    }, [room]);
+
+    useEffect(() => {
+        if (!room) return;
         const newMessage = document.getElementById(
-            messages[messages.length - 1].id
+            messages[messages.length - 1]?.id
         );
         const messageContainer = document.getElementById("mesageContainer");
 
@@ -43,7 +32,7 @@ const Chat = ({ room }: ChatProps) => {
     }, [messages]);
 
     return (
-        <div className="min-h-screen max-h-screen w-9/12 bg-gray relative flex flex-col overflow-hidden">
+        <div className="min-h-screen max-h-screen w-10/12 bg-gray relative flex flex-col overflow-hidden">
             {!!room && (
                 <div className="w-full bg-blue px-2 py-2 text-xl">
                     {room?.name}
@@ -67,13 +56,10 @@ const Chat = ({ room }: ChatProps) => {
                     />
                     <Button
                         onClick={() => {
-                            const newMessages = [...messages];
-                            newMessages.push({
-                                message: message,
-                                id: uuidv4(),
-                                type: "sent",
-                            });
-                            setMessages(newMessages);
+                            Storage.addChat(room?.id || "", message, "sent");
+                            setMessages(
+                                Storage.getRoomById(room?.id || "")?.chats || []
+                            );
                             setMessage("");
                         }}
                         buttonType="secondary"
@@ -83,13 +69,14 @@ const Chat = ({ room }: ChatProps) => {
                     </Button>
                     <Button
                         onClick={() => {
-                            const newMessages = [...messages];
-                            newMessages.push({
-                                message: message,
-                                id: uuidv4(),
-                                type: "received",
-                            });
-                            setMessages(newMessages);
+                            Storage.addChat(
+                                room?.id || "",
+                                message,
+                                "received"
+                            );
+                            setMessages(
+                                Storage.getRoomById(room?.id || "")?.chats || []
+                            );
                             setMessage("");
                         }}
                         buttonType="primary"

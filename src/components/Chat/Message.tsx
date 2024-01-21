@@ -1,7 +1,13 @@
+import { useParams } from "react-router-dom";
 import { Chat } from "../../types/room.type";
 import AES from "crypto-js/aes";
+import CryptoJS from "crypto-js";
+import Storage from "../../utils/storageUtils";
+import Button from "../Button";
 
 const Message = ({ chat }: { chat: Chat }) => {
+    const { roomId } = useParams();
+    const room = Storage.getRoomById(roomId || "");
     return (
         <div
             id={chat.id}
@@ -11,15 +17,32 @@ const Message = ({ chat }: { chat: Chat }) => {
                 chat.type === "sent" ? "bg-green" : "bg-blue",
             ].join(" ")}
         >
-            <div className="w-full border-b border-white relative pt-3 break-all">
-                <div className="absolute top-0 right-0 text-xs">encrypted</div>
-                {AES.encrypt(chat.message, "6060").toString()}
+            <div className="w-full border-b border-white relative pt-6 break-all">
+                <div className="absolute top-0 right-0 text-xs">
+                    <div className="flex">
+                        <span className="mr-2">encrypted</span>
+                        <Button
+                            size="xs"
+                            buttonType="primary"
+                            onClick={() => {
+                                window.navigator.clipboard.writeText(
+                                    chat.message
+                                );
+                            }}
+                        >
+                            copy
+                        </Button>
+                    </div>
+                </div>
+                {chat.message}
             </div>
             <div className="w-full relative pb-3">
                 <div className="absolute bottom-0 right-0 text-xs">
                     decrypted
                 </div>
-                {chat.message}
+                {AES.decrypt(chat.message, room?.passcode || "").toString(
+                    CryptoJS.enc.Utf8
+                )}
             </div>
         </div>
     );

@@ -1,5 +1,6 @@
 import { Room } from "../../types/room.type";
 import Button from "../Button";
+import Storage from "../../utils/storageUtils";
 
 interface DeleteModalProps {
     isOpen: boolean;
@@ -23,16 +24,7 @@ const DeleteModal = ({ isOpen, onClose, room }: DeleteModalProps) => {
                         <Button
                             buttonType="secondary"
                             onClick={() => {
-                                const rooms = JSON.parse(
-                                    localStorage.getItem("rooms") || "[]"
-                                );
-                                const newRooms = rooms.filter(
-                                    (_room: Room) => _room?.id !== room.id
-                                );
-                                localStorage.setItem(
-                                    "rooms",
-                                    JSON.stringify(newRooms)
-                                );
+                                Storage.deleteRoom(room.id);
                                 const event = new Event("storage");
                                 dispatchEvent(event);
                                 onClose();

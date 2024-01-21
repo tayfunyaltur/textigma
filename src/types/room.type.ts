@@ -10,3 +10,8 @@ export interface Chat {
     message: string;
     type: "sent" | "received";
 }
+
+export interface RoomDTO {
+    name: string;
+    passcode: string;
+}
