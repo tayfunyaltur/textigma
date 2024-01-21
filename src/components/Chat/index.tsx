@@ -3,7 +3,6 @@ import { Chat as ChatType, Room } from "../../types/room.type";
 import Button from "../Button";
 import TextInput from "../TextInput";
 import MessageContainer from "./MessageContainer";
-import { v4 as uuidv4 } from "uuid";
 import Storage from "../../utils/storageUtils";
 
 interface ChatProps {
@@ -23,7 +22,7 @@ const Chat = ({ room }: ChatProps) => {
         const newMessage = document.getElementById(
             messages[messages.length - 1]?.id
         );
-        const messageContainer = document.getElementById("mesageContainer");
+        const messageContainer = document.getElementById("messageContainer");
 
         messageContainer?.scrollTo({
             top: (newMessage?.offsetTop || 0) - 550,
