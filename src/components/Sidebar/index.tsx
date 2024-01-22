@@ -33,7 +33,7 @@ const Sidebar = ({ roomId }: { roomId?: string }) => {
         <>
             <div
                 data-open={isSidebarOpen}
-                className="hidden max-sm:absolute data-[open=true]:block top-4 left-4 z-10"
+                className="hidden max-lg:absolute data-[open=true]:block top-4 left-4 z-10"
             >
                 <Button
                     buttonType="secondary"
@@ -60,12 +60,12 @@ const Sidebar = ({ roomId }: { roomId?: string }) => {
                 data-open={isSidebarOpen}
                 className={[
                     "bg-darkblue min-h-svh w-2/12 border-r border-r-black",
-                    "max-sm:block max-sm:absolute max-sm:top-0 max-sm:left-0 max-sm:min-w-60 z-10 data-[open=true]:translate-x-[-20rem] transition-transform duration-500",
+                    "max-lg:block max-lg:absolute max-lg:top-0 max-lg:left-0 max-lg:min-w-60 z-10 data-[open=true]:translate-x-[-20rem] transition-transform duration-500",
                 ].join(" ")}
             >
                 <div className="flex items-end pr-4">
                     <Header />
-                    <div className="hidden max-sm:block">
+                    <div className="hidden max-lg:block">
                         <Button
                             buttonType="secondary"
                             size="xs"
