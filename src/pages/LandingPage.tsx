@@ -16,10 +16,10 @@ const LandingPage = () => {
 
     return (
         <>
-            <div className="w-full [&>div>div]:min-h-svh max-h-svh overflow-hidden flex max-lg:flex-col relative">
+            <div className="w-full [&>div>div]:min-h-svh max-h-svh overflow-hidden flex max-lg:flex-col flex-row relative">
                 <div
                     data-open={hiddenPage}
-                    className="data-[open=true]:translate-y-[-100vh] transition-all"
+                    className="max-lg:data-[open=true]:translate-y-[-100vh] max-lg:transition-all flex max-lg:flex-col w-full"
                 >
                     <div className="w-8/12 max-lg:w-full bg-black flex flex-col">
                         <Header />
@@ -35,6 +35,9 @@ const LandingPage = () => {
                         </div>
                     </div>
                     <div className="w-4/12 max-lg:w-full bg-gray flex flex-col items-center justify-center gap-2">
+                        <div className="hidden max-lg:block">
+                            <Logo />
+                        </div>
                         <div className="text-center px-4 text-lg">
                             We need your name before start to journey with us.
                         </div>
@@ -65,7 +68,7 @@ const LandingPage = () => {
             </div>
             <div
                 data-open={hiddenPage}
-                className="absolute hidden max-lg:flex bottom-10 data-[open=true]:translate-y-[-90vh] right-0 left-0  justify-center transition-all"
+                className="absolute hidden max-lg:flex bottom-20 data-[open=true]:translate-y-[-80vh] right-0 left-0  justify-center max-lg:transition-all"
             >
                 <Button
                     buttonType="primary"
