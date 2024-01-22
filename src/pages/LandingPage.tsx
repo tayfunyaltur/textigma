@@ -14,7 +14,7 @@ const LandingPage = () => {
     const navigate = useNavigate();
 
     return (
-        <div className="w-full [&>div]:min-h-screen flex">
+        <div className="w-full [&>div]:min-h-svh flex">
             <div className="w-8/12 bg-black flex flex-col">
                 <Header />
                 <div className="flex-1 px-4 flex flex-col items-center justify-center">

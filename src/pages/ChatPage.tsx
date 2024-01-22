@@ -15,7 +15,7 @@ const ChatPage = () => {
         (room: Room) => room.id === roomId
     );
     return (
-        <div className="min-h-screen flex w-full">
+        <div className="min-h-svh flex w-full">
             <Sidebar roomId={roomId} />
             <Chat room={room} />
         </div>

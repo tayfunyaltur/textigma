@@ -6,6 +6,7 @@ import { Room } from "../../types/room.type";
 import DeleteModal from "./DeleteModal";
 import { useNavigate } from "react-router-dom";
 import Storage from "../../utils/storageUtils";
+import Button from "../Button";
 
 const Sidebar = ({ roomId }: { roomId?: string }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -14,6 +15,7 @@ const Sidebar = ({ roomId }: { roomId?: string }) => {
     const [rooms, setRooms] = useState(
         JSON.parse(localStorage.getItem("rooms") || "[]")
     );
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     const isListening = useRef(false);
     useEffect(() => {
@@ -28,28 +30,20 @@ const Sidebar = ({ roomId }: { roomId?: string }) => {
     }, []);
 
     return (
-        <div className="bg-darkblue min-h-screen w-2/12 border-r border-r-black">
-            <Header />
-            <div className="flex flex-col gap-2 px-4 py-4">
-                <RoomBox
-                    key={"newChat"}
-                    roomName="New chat"
-                    isPermanent
+        <>
+            <div
+                data-open={isSidebarOpen}
+                className="hidden max-sm:absolute data-[open=true]:block top-4 left-4 z-10"
+            >
+                <Button
+                    buttonType="secondary"
+                    size="xs"
                     onClick={() => {
-                        setIsOpen(true);
+                        setIsSidebarOpen((prev) => !prev);
                     }}
-                />
-                {rooms.map((room: Room) => {
-                    return (
-                        <RoomBox
-                            key={room.id}
-                            isActive={room.id === roomId}
-                            roomName={room.name}
-                            onDelete={() => setDeleteRoom(room)}
-                            onClick={() => navigate(`/${room.id}`)}
-                        />
-                    );
-                })}
+                >
+                    &gt;
+                </Button>
             </div>
             <CreateModal
                 isOpen={isOpen}
@@ -62,7 +56,48 @@ const Sidebar = ({ roomId }: { roomId?: string }) => {
                 onClose={() => setDeleteRoom(undefined)}
                 room={deleteRoom!}
             />
-        </div>
+            <div
+                data-open={isSidebarOpen}
+                className={[
+                    "bg-darkblue min-h-svh w-2/12 border-r border-r-black hidden",
+                    "max-sm:block max-sm:absolute max-sm:top-0 max-sm:left-0 max-sm:min-w-60 z-10 data-[open=true]:translate-x-[-20rem] transition-transform duration-500",
+                ].join(" ")}
+            >
+                <div className="flex items-end pr-4">
+                    <Header />
+                    <Button
+                        buttonType="secondary"
+                        size="xs"
+                        onClick={() => {
+                            setIsSidebarOpen((prev) => !prev);
+                        }}
+                    >
+                        &lt;
+                    </Button>
+                </div>
+                <div className="flex flex-col gap-2 px-4 py-4">
+                    <RoomBox
+                        key={"newChat"}
+                        roomName="New chat"
+                        isPermanent
+                        onClick={() => {
+                            setIsOpen(true);
+                        }}
+                    />
+                    {rooms.map((room: Room) => {
+                        return (
+                            <RoomBox
+                                key={room.id}
+                                isActive={room.id === roomId}
+                                roomName={room.name}
+                                onDelete={() => setDeleteRoom(room)}
+                                onClick={() => navigate(`/${room.id}`)}
+                            />
+                        );
+                    })}
+                </div>
+            </div>
+        </>
     );
 };
 
