@@ -4,6 +4,7 @@ import Button from "../Button";
 import TextInput from "../TextInput";
 import MessageContainer from "./MessageContainer";
 import Storage from "../../utils/storageUtils";
+import messageUtils from "../../utils/messageUtils";
 
 interface ChatProps {
     room?: Room;
@@ -56,34 +57,26 @@ const Chat = ({ room }: ChatProps) => {
                     <Button
                         disabled={message.trim() === ""}
                         onClick={() => {
-                            Storage.addChat(room?.id || "", message, "sent");
-                            setMessages(
-                                Storage.getRoomById(room?.id || "")?.chats || []
-                            );
-                            setMessage("");
-                        }}
-                        buttonType="secondary"
-                        size="sm"
-                    >
-                        Encrypt
-                    </Button>
-                    <Button
-                        disabled={message.trim() === ""}
-                        onClick={() => {
+                            const isEncrypted =
+                                messageUtils.isEncrypted(message);
                             Storage.addChat(
                                 room?.id || "",
                                 message,
-                                "received"
+                                isEncrypted ? "received" : "sent"
                             );
                             setMessages(
                                 Storage.getRoomById(room?.id || "")?.chats || []
                             );
                             setMessage("");
                         }}
-                        buttonType="primary"
+                        buttonType={
+                            messageUtils.isEncrypted(message)
+                                ? "primary"
+                                : "secondary"
+                        }
                         size="sm"
                     >
-                        Decrypt
+                        Send
                     </Button>
                 </div>
             )}

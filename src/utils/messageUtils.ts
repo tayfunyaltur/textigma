@@ -11,7 +11,11 @@ const DecryptMessage = (encryptedMessage: string, passcode: string) => {
     return decryptedMessage.toString(CryptoJS.enc.Utf8);
 };
 
+const isEncrypted = (message: string) => {
+    return message.includes("U2FsdGVkX1") && message.split("").pop() === "=";
+};
 export default {
     EncryptMessage,
     DecryptMessage,
+    isEncrypted,
 };
