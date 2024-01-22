@@ -10,52 +10,74 @@ import { useNavigate } from "react-router-dom";
 const LandingPage = () => {
     const [val, setVal] = useState("");
     const [error, setError] = useState(false);
+    const [hiddenPage, setHiddenPage] = useState(false);
 
     const navigate = useNavigate();
 
     return (
-        <div className="w-full [&>div]:min-h-svh flex">
-            <div className="w-8/12 bg-black flex flex-col">
-                <Header />
-                <div className="flex-1 px-4 flex flex-col items-center justify-center">
-                    <div className="text-green flex items-center justify-center gap-2">
-                        <span className="text-2xl">Welcome to </span>
-                        <Logo />
+        <>
+            <div className="w-full [&>div>div]:min-h-svh max-h-svh overflow-hidden flex max-lg:flex-col relative">
+                <div
+                    data-open={hiddenPage}
+                    className="data-[open=true]:translate-y-[-100vh] transition-all"
+                >
+                    <div className="w-8/12 max-lg:w-full bg-black flex flex-col">
+                        <Header />
+                        <div className="flex-1 px-4 flex flex-col items-center justify-center">
+                            <div className="text-green flex items-center justify-center gap-2">
+                                <span className="text-2xl">Welcome to </span>
+                                <Logo />
+                            </div>
+                            <TypingText
+                                className=" text-xl border-green border text-green mt-8 p-4 min-h-[10rem] w-full"
+                                text={Constants.WelcomeMessages}
+                            />
+                        </div>
                     </div>
-                    <TypingText
-                        className=" text-xl border-green border text-green mt-8 p-4 min-h-[10rem] w-full"
-                        text={Constants.WelcomeMessages}
-                    />
+                    <div className="w-4/12 max-lg:w-full bg-gray flex flex-col items-center justify-center gap-2">
+                        <div className="text-center px-4 text-lg">
+                            We need your name before start to journey with us.
+                        </div>
+                        <TextInput
+                            value={val}
+                            onChange={(val) => {
+                                setVal(val);
+                                setError(false);
+                            }}
+                            error={error}
+                            placeholder="John Doe"
+                        />
+                        <Button
+                            onClick={() => {
+                                if (val.length < 3) {
+                                    setError(true);
+                                    return;
+                                }
+                                localStorage.setItem("name", val);
+                                navigate("chat");
+                            }}
+                            buttonType="secondary"
+                        >
+                            Get Secured
+                        </Button>
+                    </div>
                 </div>
             </div>
-            <div className="w-4/12 bg-gray flex flex-col items-center justify-center gap-2">
-                <div className="text-center px-4 text-lg">
-                    We need your name before start to journey with us.
-                </div>
-                <TextInput
-                    value={val}
-                    onChange={(val) => {
-                        setVal(val);
-                        setError(false);
-                    }}
-                    error={error}
-                    placeholder="John Doe"
-                />
+            <div
+                data-open={hiddenPage}
+                className="absolute hidden max-lg:flex bottom-10 data-[open=true]:translate-y-[-90vh] right-0 left-0  justify-center transition-all"
+            >
                 <Button
+                    buttonType="primary"
                     onClick={() => {
-                        if (val.length < 3) {
-                            setError(true);
-                            return;
-                        }
-                        localStorage.setItem("name", val);
-                        navigate("chat");
+                        setHiddenPage((prev) => !prev);
                     }}
-                    buttonType="secondary"
+                    size="md"
                 >
-                    Get Secured
+                    {hiddenPage ? "Back" : "Next"}
                 </Button>
             </div>
-        </div>
+        </>
     );
 };
 
