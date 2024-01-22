@@ -59,21 +59,23 @@ const Sidebar = ({ roomId }: { roomId?: string }) => {
             <div
                 data-open={isSidebarOpen}
                 className={[
-                    "bg-darkblue min-h-svh w-2/12 border-r border-r-black hidden",
+                    "bg-darkblue min-h-svh w-2/12 border-r border-r-black",
                     "max-sm:block max-sm:absolute max-sm:top-0 max-sm:left-0 max-sm:min-w-60 z-10 data-[open=true]:translate-x-[-20rem] transition-transform duration-500",
                 ].join(" ")}
             >
                 <div className="flex items-end pr-4">
                     <Header />
-                    <Button
-                        buttonType="secondary"
-                        size="xs"
-                        onClick={() => {
-                            setIsSidebarOpen((prev) => !prev);
-                        }}
-                    >
-                        &lt;
-                    </Button>
+                    <div className="hidden max-sm:block">
+                        <Button
+                            buttonType="secondary"
+                            size="xs"
+                            onClick={() => {
+                                setIsSidebarOpen((prev) => !prev);
+                            }}
+                        >
+                            &lt;
+                        </Button>
+                    </div>
                 </div>
                 <div className="flex flex-col gap-2 px-4 py-4">
                     <RoomBox
