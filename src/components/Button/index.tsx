@@ -31,7 +31,7 @@ const Button = ({
         <button
             onClick={onClick}
             disabled={disabled}
-            className={`disabled:cursor-not-allowed group ${styles[buttonType]} ${sizes[size]} rounded-sm uppercase border-2 hover:outline hover:outline-black flex`}
+            className={`disabled:cursor-not-allowed group ${styles[buttonType]} ${sizes[size]} rounded-sm uppercase border-2 hover:outline hover:outline-black flex h-fit`}
         >
             <span className="opacity-0 group-disabled:opacity-100">x</span>
             <span className="opacity-0 group-hover:opacity-100 group-disabled:opacity-0">

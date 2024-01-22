@@ -16,7 +16,7 @@ const Message = ({ chat }: { chat: Chat }) => {
             className={[
                 "text-white px-2 py-2 rounded-sm w-6/12",
                 chat.type === "sent" ? "ml-auto mr-4" : "mr-auto ml-4",
-                chat.type === "sent" ? "bg-green" : "bg-blue",
+                chat.type === "sent" ? "bg-green text-left" : "bg-blue text-left",
             ].join(" ")}
         >
             <div className="w-full border-b border-white relative pt-6 break-all">

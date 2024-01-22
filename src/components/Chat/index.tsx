@@ -31,7 +31,7 @@ const Chat = ({ room }: ChatProps) => {
     }, [messages]);
 
     return (
-        <div className="min-h-screen max-h-screen w-10/12 bg-gray relative flex flex-col overflow-hidden">
+        <div className="min-h-svh max-h-svh w-10/12 bg-gray relative flex flex-col overflow-hidden max-sm:w-full text-center">
             {!!room && (
                 <div className="w-full bg-blue px-2 py-2 text-xl border-b border-b-black">
                     {room?.name}
