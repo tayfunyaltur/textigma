@@ -12,7 +12,8 @@ const DevModal = ({
             data-open={isOpen}
             className="absolute data-[open=false]:hidden inset-0 bg-black bg-opacity-50 flex items-center justify-center z-40 max-md:px-4"
         >
-            <div className="bg-white opacity-100 rounded-lg p-8 w-[25rem] max-md:w-full text-center">
+            <div className="bg-white opacity-100 rounded-lg p-8 w-[25rem] max-md:w-full text-center relative">
+                <div className="absolute top-0 right-2">v{localStorage.getItem("version")}</div>
                 We're constantly working on new features! For advices,
                 suggestions or bug reports, please contact us at
                 <a

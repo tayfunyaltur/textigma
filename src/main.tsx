@@ -6,6 +6,16 @@ import LandingPage from "./pages/LandingPage.tsx";
 import ChatPage from "./pages/ChatPage.tsx";
 import Toastr from "./components/Toastr/index.tsx";
 
+const version = "1.0.0";
+const prevVersion = localStorage.getItem("version");
+if (prevVersion !== version) {
+    localStorage.clear();
+    localStorage.setItem("version", version);
+    window.location.reload();
+}
+
+localStorage.setItem("version", version);
+
 const router = createBrowserRouter([
     {
         path: "/:roomId",
