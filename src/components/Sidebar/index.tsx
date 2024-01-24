@@ -7,6 +7,7 @@ import DeleteModal from "./DeleteModal";
 import { useNavigate } from "react-router-dom";
 import Storage from "../../utils/storageUtils";
 import Button from "../Button";
+import clickUtil from "../../utils/clickUtil";
 
 const Sidebar = ({ roomId }: { roomId?: string }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -18,6 +19,9 @@ const Sidebar = ({ roomId }: { roomId?: string }) => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     const isListening = useRef(false);
+    const ref = clickUtil.useOutsideClick(() => {
+        setIsSidebarOpen(false);
+    });
     useEffect(() => {
         if (isListening.current) return;
         addEventListener("storage", () => {
@@ -33,13 +37,14 @@ const Sidebar = ({ roomId }: { roomId?: string }) => {
         <>
             <div
                 data-open={isSidebarOpen}
-                className="hidden max-lg:absolute data-[open=true]:block top-4 left-4 z-10"
+                className="hidden max-lg:absolute max-lg:data-[open=false]:block top-4 left-4 z-10"
             >
                 <Button
                     buttonType="secondary"
                     size="xs"
-                    onClick={() => {
+                    onClick={(e) => {
                         setIsSidebarOpen((prev) => !prev);
+                        e.stopPropagation();
                     }}
                 >
                     &gt;
@@ -60,17 +65,19 @@ const Sidebar = ({ roomId }: { roomId?: string }) => {
                 data-open={isSidebarOpen}
                 className={[
                     "bg-darkblue min-h-svh w-2/12 border-r border-r-black",
-                    "max-lg:block max-lg:absolute max-lg:top-0 max-lg:left-0 max-lg:min-w-60 z-10 data-[open=true]:translate-x-[-20rem] transition-transform duration-500",
+                    "max-lg:block max-lg:absolute max-lg:top-0 max-lg:left-0 max-lg:min-w-60 z-10 max-lg:data-[open=false]:translate-x-[-20rem] transition-transform duration-500",
                 ].join(" ")}
+                ref={ref}
             >
-                <div className="flex items-end pr-4">
+                <div className="flex items-end pr-4 border-b border-white pb-5">
                     <Header />
                     <div className="hidden max-lg:block">
                         <Button
                             buttonType="secondary"
                             size="xs"
-                            onClick={() => {
+                            onClick={(e) => {
                                 setIsSidebarOpen((prev) => !prev);
+                                e.stopPropagation();
                             }}
                         >
                             &lt;

@@ -17,7 +17,7 @@ export default {
             keyframes: {
                 downflow: {
                     "0%, 100%": { transform: "translateY(0)" },
-                    "25%": { transform: "translateY(-1.5rem)" },
+                    "25%": { transform: "translateY(-1.51rem)" },
                     "50%": { transform: "translateY(-3rem)" },
                     "75%": { transform: "translateY(-1.5rem)" },
                     "100%": { transform: "translateY(0)" },

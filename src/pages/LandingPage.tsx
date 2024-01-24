@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Button from "../components/Button";
 import Header from "../components/Header";
 import Logo from "../components/Logo";
@@ -6,6 +6,7 @@ import TextInput from "../components/TextInput";
 import TypingText from "../components/TypingText";
 import Constants from "../constants";
 import { useNavigate } from "react-router-dom";
+import DevModal from "../components/DevModal";
 
 const LandingPage = () => {
     const [val, setVal] = useState("");
@@ -13,9 +14,29 @@ const LandingPage = () => {
     const [hiddenPage, setHiddenPage] = useState(false);
 
     const navigate = useNavigate();
+    const [isOpen, setIsOpen] = useState(
+        localStorage.getItem("opened") !== "true"
+    );
+    const isChecked = useRef(false);
+
+    useEffect(() => {
+        if (isChecked.current) return;
+        const name = localStorage.getItem("name");
+        if (name) {
+            navigate("chat");
+        }
+        isChecked.current = true;
+    }, []);
 
     return (
         <>
+            <DevModal
+                isOpen={isOpen}
+                onClose={() => {
+                    localStorage.setItem("opened", "true");
+                    setIsOpen(false);
+                }}
+            />
             <div className="w-full [&>div>div]:min-h-svh max-h-svh overflow-hidden flex max-lg:flex-col flex-row relative">
                 <div
                     data-open={hiddenPage}
