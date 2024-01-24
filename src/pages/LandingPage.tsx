@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Button from "../components/Button";
 import Header from "../components/Header";
 import Logo from "../components/Logo";
@@ -17,6 +17,16 @@ const LandingPage = () => {
     const [isOpen, setIsOpen] = useState(
         localStorage.getItem("opened") !== "true"
     );
+    const isChecked = useRef(false);
+
+    useEffect(() => {
+        if (isChecked.current) return;
+        const name = localStorage.getItem("name");
+        if (name) {
+            navigate("chat");
+        }
+        isChecked.current = true;
+    }, []);
 
     return (
         <>
