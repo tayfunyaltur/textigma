@@ -1,4 +1,4 @@
-const texts = ["Text", "#$%^", "TYFN"];
+const texts = ["Text", "#$%^", "^)@#"];
 
 const Logo = () => (
     <div className="font-DOS flex rounded-sm overflow-hidden w-fit">

@@ -12,7 +12,7 @@ const DecryptMessage = (encryptedMessage: string, passcode: string) => {
 };
 
 const isEncrypted = (message: string) => {
-    return message.includes("U2FsdGVkX1") && message.split("").pop() === "=";
+    return message.includes("U2FsdGVkX1");
 };
 export default {
     EncryptMessage,

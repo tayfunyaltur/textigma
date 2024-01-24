@@ -1,9 +1,11 @@
+
 interface ButtonProps {
     children: React.ReactNode;
-    onClick: () => void;
+    onClick: (e:React.MouseEvent<HTMLElement>) => void;
     buttonType?: "primary" | "secondary" | "outline" | "text";
     size?: "xs" | "sm" | "md" | "lg";
     disabled?: boolean;
+    className?: string;
 }
 
 const Button = ({
@@ -12,6 +14,7 @@ const Button = ({
     buttonType = "primary",
     size = "md",
     disabled,
+    className,
 }: ButtonProps) => {
     const styles = {
         primary: "bg-blue text-white border-blue",
@@ -29,9 +32,12 @@ const Button = ({
 
     return (
         <button
-            onClick={onClick}
+            onClick={(e: React.MouseEvent<HTMLElement>) => {
+                onClick(e);
+                e.stopPropagation();
+            }}
             disabled={disabled}
-            className={`disabled:cursor-not-allowed group ${styles[buttonType]} ${sizes[size]} rounded-sm uppercase border-2 hover:outline hover:outline-black flex h-fit`}
+            className={`disabled:cursor-not-allowed group ${styles[buttonType]} ${sizes[size]} rounded-sm uppercase border-2 hover:outline hover:outline-black flex h-fit ${className}`}
         >
             <span className="opacity-0 group-disabled:opacity-100">x</span>
             <span className="opacity-0 group-hover:opacity-100 group-disabled:opacity-0">
