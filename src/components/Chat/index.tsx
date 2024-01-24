@@ -64,6 +64,17 @@ const Chat = ({ room }: ChatProps) => {
                         onChange={(val) => {
                             setMessage(val);
                         }}
+                        onEnter={(val) => {
+                            const isEncrypted = messageUtils.isEncrypted(val);
+                            const _message = Storage.addChat(
+                                room?.id || "",
+                                val,
+                                isEncrypted ? "received" : "sent"
+                            );
+                            if (_message)
+                                setMessages((prev) => [...prev, _message]);
+                            setMessage("");
+                        }}
                         type="text"
                         className="w-full"
                         placeholder="Type Your Message"
