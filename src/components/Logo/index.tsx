@@ -2,7 +2,7 @@ const texts = ["Text", "#$%^", "Text"];
 
 const Logo = () => (
     <div className="font-DOS flex rounded-sm overflow-hidden w-fit">
-        <div className="overflow-hidden max-h-[1.47rem]">
+        <div className="overflow-hidden max-h-[1.5rem]">
             <div className=" animate-downflow">
                 {texts.map((text, index) =>
                     text === "Text" ? (

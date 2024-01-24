@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TextInput from "../TextInput";
 import Button from "../Button";
 import Storage from "../../utils/storageUtils";
+import { useNavigate } from "react-router-dom";
 
 interface createModalProps {
     isOpen: boolean;
@@ -12,6 +13,13 @@ const CreateModal = ({ isOpen, onClose }: createModalProps) => {
     const [roomName, setRoomName] = useState("");
     const [passcode, setPasscode] = useState("");
     const [error, setError] = useState<string[]>([]);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        setRoomName("");
+        setPasscode("");
+        setError([]);
+    }, [isOpen]);
 
     return (
         isOpen && (
@@ -65,7 +73,11 @@ const CreateModal = ({ isOpen, onClose }: createModalProps) => {
                                     setError(errors);
                                     return;
                                 }
-                                Storage.addRoom({ name: roomName, passcode });
+                                const newRoom = Storage.addRoom({
+                                    name: roomName,
+                                    passcode,
+                                });
+                                navigate(`/${newRoom.id}`);
                                 const event = new Event("storage");
                                 dispatchEvent(event);
                                 onClose();

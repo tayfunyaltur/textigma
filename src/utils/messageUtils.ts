@@ -7,8 +7,12 @@ const EncryptMessage = (message: string, passcode: string) => {
 };
 
 const DecryptMessage = (encryptedMessage: string, passcode: string) => {
-    const decryptedMessage = AES.decrypt(encryptedMessage, passcode);
-    return decryptedMessage.toString(CryptoJS.enc.Utf8);
+    try {
+        const decryptedMessage = AES.decrypt(encryptedMessage, passcode);
+        return decryptedMessage.toString(CryptoJS.enc.Utf8);
+    } catch (e) {
+        return "";
+    }
 };
 
 const isEncrypted = (message: string) => {
