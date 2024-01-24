@@ -14,7 +14,7 @@ const Provider = ({ children }: { children: React.ReactNode }) => {
         if (!notification) return;
         const timer = setTimeout(() => {
             setNotification("");
-        }, 1000);
+        }, 3000);
 
         return () => {
             clearTimeout(timer);
@@ -23,9 +23,9 @@ const Provider = ({ children }: { children: React.ReactNode }) => {
 
     return (
         <NotificationContext.Provider value={addNotification}>
-            <div className="absolute top-1/2  left-1/4 right-1/4 max-md:left-10 max-md:right-10 z-20">
+            <div className="absolute top-3 right-[-13rem] z-20">
                 {!!notification && (
-                    <div className="bg-green rounded-sm border border-gray px-4 py-2 flex items-center gap-2 justify-between animate-bounce text-white duration-1000">
+                    <div className="bg-green rounded-sm border border-gray px-4 py-2 flex items-center gap-2 justify-between animate-notification text-white duration-100">
                         <span className="text-md">{notification}</span>
                         <button
                             onClick={() => {

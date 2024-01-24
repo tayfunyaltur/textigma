@@ -22,9 +22,14 @@ export default {
                     "75%": { transform: "translateY(-1.5rem)" },
                     "100%": { transform: "translateY(0)" },
                 },
+                notification: {
+                    "0%": { transform: "translateX(0)" },
+                    "100%": { transform: "translateX(-100%)" },
+                },
             },
             animation: {
                 downflow: "downflow 3s steps(1,end) infinite",
+                notification: "notification 1s ease-in-out forwards",
             },
         },
     },
