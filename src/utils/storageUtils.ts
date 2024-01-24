@@ -46,10 +46,11 @@ const addChat = (
                 ? messageUtils.EncryptMessage(message, room.passcode)
                 : message,
         type,
+        isEncrypted: true,
     };
     room?.chats.push(newChat);
     localStorage.setItem("rooms", JSON.stringify(rooms));
-    return newChat;
+    return { ...newChat, isEncrypted: false };
 };
 
 const deleteRoom = (id: string) => {

@@ -9,6 +9,7 @@ export interface Chat {
     id: string;
     message: string;
     type: "sent" | "received";
+    isEncrypted?: boolean;
 }
 
 export interface RoomDTO {

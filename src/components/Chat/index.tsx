@@ -26,7 +26,7 @@ const Chat = ({ room }: ChatProps) => {
         const messageContainer = document.getElementById("messageContainer");
 
         messageContainer?.scrollTo({
-            top: (newMessage?.offsetTop || 0) - 550,
+            top: (newMessage?.offsetTop || 0) + 500,
             behavior: "smooth",
         });
     }, [messages]);
@@ -60,14 +60,13 @@ const Chat = ({ room }: ChatProps) => {
                         onClick={() => {
                             const isEncrypted =
                                 messageUtils.isEncrypted(message);
-                            Storage.addChat(
+                            const _message = Storage.addChat(
                                 room?.id || "",
                                 message,
                                 isEncrypted ? "received" : "sent"
                             );
-                            setMessages(
-                                Storage.getRoomById(room?.id || "")?.chats || []
-                            );
+                            if (_message)
+                                setMessages((prev) => [...prev, _message]);
                             setMessage("");
                         }}
                         buttonType={
