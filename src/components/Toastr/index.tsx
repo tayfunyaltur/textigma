@@ -23,9 +23,9 @@ const Provider = ({ children }: { children: React.ReactNode }) => {
 
     return (
         <NotificationContext.Provider value={addNotification}>
-            <div className="absolute top-3 right-[-13rem] z-20">
+            <div className="absolute top-3 right-[-13rem] z-20 ">
                 {!!notification && (
-                    <div className="bg-green rounded-sm border border-gray px-4 py-2 flex items-center gap-2 justify-between animate-notification text-white duration-100">
+                    <div className="bg-green rounded-sm border border-gray px-4 py-2 flex items-center gap-2 justify-between animate-notification text-white duration-100 shadow-md shadow-zinc-700">
                         <span className="text-md">{notification}</span>
                         <button
                             onClick={() => {

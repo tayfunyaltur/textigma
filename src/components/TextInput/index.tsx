@@ -22,7 +22,7 @@ const TextInput = ({
             placeholder={placeholder}
             type={type}
             className={[
-                "[&::placeholder]:text-black px-2 bg-transparent border-2 border-black focus-visible:outline-0 focus-visible:border-black focus-within:ring-2 focus-within:ring-blue focus:bg-blue break-all",
+                "[&::placeholder]:text-black px-2 bg-transparent border-2 border-black focus-visible:outline-0 focus-visible:border-black focus-within:ring-2 focus-within:ring-blue focus:bg-blue break-all shadow-md shadow-zinc-700",
                 className,
                 error && "!border-red-800",
             ].join(" ")}

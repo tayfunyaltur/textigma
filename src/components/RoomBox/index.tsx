@@ -17,13 +17,13 @@ const RoomBox = ({
         <div
             onClick={onClick}
             className={[
-                " border-2 px-2 font-bold cursor-pointer flex justify-between items-center",
-                isActive && "border-green text-green",
-                !isActive && "border-gray text-gray",
+                " border-2 px-2 py-3 font-bold cursor-pointer flex justify-between items-center rounded-sm bg-gray text-black shadow-md shadow-zinc-700",
+                isActive && "bg-green !border-green !text-black",
+                !isActive && "border-gray ",
                 "hover:border-blue hover:text-blue",
             ].join(" ")}
         >
-            <span>{roomName}</span>
+            <span className="text-lg">{roomName}</span>
             {!isPermanent && !isActive && (
                 <span
                     className="text-red-800 group"
