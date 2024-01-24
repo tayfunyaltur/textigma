@@ -35,7 +35,7 @@ const TypingText = ({ text, className }: TypingTextProps) => {
             } else if (index.current === text[textIndex.current].length) {
                 direction.current = 0;
             }
-        }, 50);
+        }, 75);
         return () => clearInterval(interval);
     }, []);
 
