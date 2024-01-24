@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Chat as ChatType, Room } from "../../types/room.type";
 import Button from "../Button";
 import TextInput from "../TextInput";
@@ -11,6 +11,7 @@ interface ChatProps {
 }
 
 const Chat = ({ room }: ChatProps) => {
+    const isInitial = useRef(true);
     const [messages, setMessages] = useState<ChatType[]>(room?.chats || []);
     const [message, setMessage] = useState("");
 
@@ -25,10 +26,22 @@ const Chat = ({ room }: ChatProps) => {
         );
         const messageContainer = document.getElementById("messageContainer");
 
-        messageContainer?.scrollTo({
-            top: (newMessage?.offsetTop || 0) + 500,
-            behavior: "smooth",
-        });
+        if (isInitial.current) {
+            setTimeout(() => {
+                messageContainer?.scrollTo({
+                    top: (newMessage?.offsetTop || 0) + 5500,
+                    behavior: "auto",
+                });
+            }, 0);
+        } else {
+            setTimeout(() => {
+                messageContainer?.scrollTo({
+                    top: (newMessage?.offsetTop || 0) + 5500,
+                    behavior: "smooth",
+                });
+            }, 80);
+        }
+        isInitial.current = false;
     }, [messages]);
 
     return (

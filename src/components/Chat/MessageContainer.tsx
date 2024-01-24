@@ -1,4 +1,3 @@
-import React from "react";
 import { Chat } from "../../types/room.type";
 import Message from "./Message";
 
@@ -14,4 +13,4 @@ const MessageContainer = ({ messages }: { messages: Chat[] }) => {
     );
 };
 
-export default React.memo(MessageContainer);
+export default MessageContainer;
