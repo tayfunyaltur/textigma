@@ -68,7 +68,7 @@ const LandingPage = () => {
             </div>
             <div
                 data-open={hiddenPage}
-                className="absolute hidden max-lg:flex bottom-20 data-[open=true]:translate-y-[-80vh] right-0 left-0  justify-center max-lg:transition-all"
+                className="absolute hidden max-lg:flex bottom-20 data-[open=true]:translate-y-[-70vh] right-0 left-0  justify-center max-lg:transition-all"
             >
                 <Button
                     buttonType="primary"
