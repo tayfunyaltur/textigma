@@ -19,7 +19,7 @@ const LandingPage = () => {
             <div className="w-full [&>div>div]:min-h-svh max-h-svh overflow-hidden flex max-lg:flex-col flex-row relative">
                 <div
                     data-open={hiddenPage}
-                    className="max-lg:data-[open=true]:translate-y-[-100vh] max-lg:transition-all flex max-lg:flex-col w-full"
+                    className="max-lg:data-[open=true]:translate-y-[-100svh] max-lg:transition-all flex max-lg:flex-col w-full"
                 >
                     <div className="w-8/12 max-lg:w-full bg-black flex flex-col">
                         <Header />
