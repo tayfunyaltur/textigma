@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import Chat from "../components/Chat";
 import Sidebar from "../components/Sidebar";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import storageUtils from "../utils/storageUtils";
 
 const ChatPage = () => {
