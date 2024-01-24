@@ -6,7 +6,7 @@ import LandingPage from "./pages/LandingPage.tsx";
 import ChatPage from "./pages/ChatPage.tsx";
 import Toastr from "./components/Toastr/index.tsx";
 
-const version = "1.0.2";
+const version = "1.0.3";
 const prevVersion = localStorage.getItem("version");
 if (prevVersion?.split(".")[0] !== version.split(".")[0]) {
     localStorage.clear();
