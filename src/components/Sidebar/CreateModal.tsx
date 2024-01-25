@@ -3,6 +3,7 @@ import TextInput from "../TextInput";
 import Button from "../Button";
 import Storage from "../../utils/storageUtils";
 import { useNavigate } from "react-router-dom";
+import storageUtils from "../../utils/storageUtils";
 
 interface createModalProps {
     isOpen: boolean;
@@ -14,6 +15,7 @@ const CreateModal = ({ isOpen, onClose }: createModalProps) => {
     const [passcode, setPasscode] = useState("");
     const [error, setError] = useState<string[]>([]);
     const navigate = useNavigate();
+    const rooms = storageUtils.getRooms();
 
     useEffect(() => {
         setRoomName("");
@@ -30,7 +32,7 @@ const CreateModal = ({ isOpen, onClose }: createModalProps) => {
                     </span>
                     <div className="w-full flex flex-col justify-center items-center mt-4 gap-4">
                         <TextInput
-                            placeholder="Room name"
+                            placeholder="Room name(optional)"
                             onChange={(val) => {
                                 setRoomName(val);
                                 setError(error.filter((e) => e !== "roomname"));
@@ -63,10 +65,7 @@ const CreateModal = ({ isOpen, onClose }: createModalProps) => {
                         <Button
                             onClick={() => {
                                 const errors = [];
-                                if (!roomName || !passcode) {
-                                    if (!roomName) {
-                                        errors.push("roomname");
-                                    }
+                                if (!passcode) {
                                     if (!passcode) {
                                         errors.push("passcode");
                                     }
@@ -74,7 +73,7 @@ const CreateModal = ({ isOpen, onClose }: createModalProps) => {
                                     return;
                                 }
                                 const newRoom = Storage.addRoom({
-                                    name: roomName,
+                                    name: roomName || `Room #${rooms.length + 1}`,
                                     passcode,
                                 });
                                 navigate(`/${newRoom.id}`);
